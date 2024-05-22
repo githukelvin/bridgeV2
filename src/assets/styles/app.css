@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'GExtralight';
+    src:
+      url('../fonts/ClashGrotesk-Extralight.woff2') format('woff2'),
+      url('../fonts/ClashGrotesk-Extralight.woff') format('woff'),
+      url('../fonts/ClashGrotesk-Extralight.ttf') format('truetype');
+    font-weight: 200;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Glight';
+    src:
+      url('../fonts/ClashGrotesk-Light.woff2') format('woff2'),
+      url('../fonts/ClashGrotesk-Light.woff') format('woff'),
+      url('../fonts/ClashGrotesk-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Gregular';
+    src:
+      url('../fonts/ClashGrotesk-Regular.woff2') format('woff2'),
+      url('../fonts/ClashGrotesk-Regular.woff') format('woff'),
+      url('../fonts/ClashGrotesk-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Gmedium';
+    src:
+      url('../fonts/ClashGrotesk-Medium.woff2') format('woff2'),
+      url('../fonts/ClashGrotesk-Medium.woff') format('woff'),
+      url('../fonts/ClashGrotesk-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Gsemibold';
+    src:
+      url('../fonts/ClashGrotesk-Semibold.woff2') format('woff2'),
+      url('../fonts/ClashGrotesk-Semibold.woff') format('woff'),
+      url('../fonts/ClashGrotesk-Semibold.ttf') format('truetype');
+    font-weight: 600;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Gbold';
+    src:
+      url('../fonts/ClashGrotesk-Bold.woff2') format('woff2'),
+      url('../fonts/ClashGrotesk-Bold.woff') format('woff'),
+      url('../fonts/ClashGrotesk-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-display: swap;
+    font-style: normal;
+  }
+  /**
+      * This is a variable font
+      * You can control variable axes as shown below:
+      * font-variation-settings: wght 700.0;
+      *
+      * available axes:
+      'wght' (range from 200.0 to 700.0
+      */
+  @font-face {
+    font-family: 'ClashGrotesk-Variable';
+    src:
+      url('../fonts/ClashGrotesk-Variable.woff2') format('woff2'),
+      url('../fonts/ClashGrotesk-Variable.woff') format('woff'),
+      url('../fonts/ClashGrotesk-Variable.ttf') format('truetype');
+    font-weight: 200 700;
+    font-display: swap;
+    font-style: normal;
+  }
+
+  /* Causten  Fonts */
+  @font-face {
+    font-family: 'Cbold';
+    src:
+      url('../fonts/Causten-Bold.woff2') format('woff2'),
+      url('../fonts/Causten-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Cextra';
+    src:
+      url('../fonts/Causten-ExtraBold.woff2') format('woff2'),
+      url('../fonts/Causten-ExtraBold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Cblack';
+    src:
+      url('../fonts/Causten-Black.woff2') format('woff2'),
+      url('../fonts/Causten-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Clight';
+    src:
+      url('../fonts/Causten-Light.woff2') format('woff2'),
+      url('../fonts/Causten-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Cmedium';
+    src:
+      url('../fonts/Causten-Medium.woff2') format('woff2'),
+      url('../fonts/Causten-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Cregular';
+    src:
+      url('../fonts/Causten-Regular.woff2') format('woff2'),
+      url('../fonts/Causten-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Csemibold';
+    src:
+      url('../fonts/Causten-SemiBold.woff2') format('woff2'),
+      url('../fonts/Causten-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+}

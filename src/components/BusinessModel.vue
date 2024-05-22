@@ -1,0 +1,106 @@
+<template>
+  <FormArch step="3" title="Business Model">
+    {{ data }}
+    <VForm
+      :validation-schema="businessModelSchema"
+      v-slot="{ meta: formMeta }"
+      novalidate
+      @submit="nextStep"
+      class="flex flex-col gap-6 w-[90vw] mx-auto lg:w-full"
+    >
+      <InputBox
+        rows="3"
+        id="revenueModel"
+        label="What is your current revenue model?"
+        vmodelName="revenueModel"
+      />
+      <InputBox
+        rows="3"
+        id="tokenomicsAllocation"
+        label="Share more details about your tokenomics allocation (if applicable)"
+        vmodelName="tokenomicsAllocation"
+      />
+
+      <h1 class="font-['Gsemibold'] text-[1.125em]">Regulatory Compliance</h1>
+      <InputBox
+        rows="3"
+        id="country"
+        label="Which country are you currently in or planning to be incorporated in?"
+        vmodelName="country"
+      />
+      <h1 class="font-['Gsemibold'] text-[1.125em]">Financials</h1>
+      <InputBox
+        rows="3"
+        id="previousAmountRaised"
+        label="Tell us more about your funding history (previous rounds, amount raised)"
+        vmodelName="previousAmountRaised"
+      />
+      <InputBox
+        rows="3"
+        id="financial"
+        label="Share more information about your future financial projections"
+        vmodelName="financial"
+      />
+
+      <InputBox
+        rows="3"
+        id="recurringRevenue"
+        label="What is your current monthly recurring revenue?"
+        vmodelName="recurringRevenue"
+      />
+      <InputBox
+        rows="3"
+        id="usage"
+        label="How will the investments be utilized?"
+        vmodelName="usage"
+      />
+      <!-- Action:group -->
+      <div class="actionBtns relative">
+        <button
+          class="bg-transparent items-center absolute right-0 top-2 p-[1em] flex flex-row text-accent-400 font-['Csemibold'] cursor-pointer text-[1.25em] gap-2"
+          type="submit"
+        >
+          Next Step <IconArrow />
+        </button>
+      </div>
+    </VForm>
+  </FormArch>
+</template>
+
+<script setup lang="ts">
+import FormArch from './FormArch.vue'
+import InputBox from './InputBox.vue'
+import IconArrow from './IconArrow.vue'
+import { Form as VForm } from 'vee-validate'
+import { supabase } from '../utils/supabaseClient'
+import { ref } from 'vue'
+const data = ref()
+import * as Yup from 'yup'
+
+interface Business {
+  revenueModel: String
+  tokenomicsAllocation: String
+  country: String
+  financial: String
+  recurringRevenue: String
+  usage: String
+  previousAmountRaised: String
+}
+
+const businessModelSchema = Yup.object().shape({
+  revenueModel: Yup.string().required(),
+  tokenomicsAllocation: Yup.string().required(),
+  country: Yup.string().required(),
+  financial: Yup.string().required(),
+  recurringRevenue: Yup.string().required(),
+  usage: Yup.string().required(),
+  previousAmountRaised: Yup.string().required()
+})
+const nextStep = async (values: any) => {
+  values = values as Business
+  console.log(values)
+  data.value = await supabase.from('Token').select()
+
+  alert('clicked')
+}
+</script>
