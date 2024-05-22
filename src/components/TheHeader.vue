@@ -9,28 +9,29 @@
         /></RouterLink>
       </div>
       <div
+      ref="navRef"
         class="nav absolute top-[3.7em] w-full py-[2em] lg:relative z-[9999] left-1/2 bg-primary-300 -translate-x-1/2 lg:mt-0 lg:top-0 lg:p-0 lg:left-0 lg:translate-x-0"
       >
         <!--   -->
         <nav class="">
           <ul class="lg:flex lg:flex-row lg:gap-6 w-full grid flex-col gap-4 justify-center">
             <li>
-              <a class="text-[#FEFEFE] font-['Csemibold'] text-xl" href="../#about"
+              <a class="text-[#FEFEFE] font-['Csemibold'] text-xl" href="../#about" ref="linkAnchor"
                 >About</a
               >
             </li>
             <li>
-              <router-link class="text-[#FEFEFE] font-['Csemibold'] text-xl" to="/investForm"
+              <router-link class="text-[#FEFEFE] font-['Csemibold'] text-xl" to="/investForm" ref="linkAnchor"
                 >Get Investors</router-link
               >
             </li>
             <li>
-              <a class="text-[#FEFEFE] font-['Csemibold'] text-xl" href="../#whyus"
+              <a class="text-[#FEFEFE] font-['Csemibold'] text-xl" href="../#whyus" ref="linkAnchor"
                 >Why Us</a
               >
             </li>
             <li>
-              <a class="text-[#FEFEFE] font-['Csemibold'] text-xl" href="../#contact">
+              <a class="text-[#FEFEFE] font-['Csemibold'] text-xl" href="../#contact" ref="linkAnchor">
                 Contact Us</a
               >
             </li>
@@ -83,7 +84,12 @@
         </a>
       </div>
       <div class="ham lg:hidden">
-        <TheHam />
+        <div ref="hamburgerRef" class="hamburger">
+    <img class="object-fit"  :src="HamImage" alt="ham image" />
+  </div>
+  <div class="close"  ref="closeRef"> 
+    <img :src="XmarkImage" alt="x mark image" />
+  </div>
       </div>
     </div>
     <div class="w-full h-[1px] bg-white mt-3"></div>
@@ -93,6 +99,50 @@
 <script setup lang="ts">
 import Logo from "@/assets/images/ColouredVersion.svg"
 import TheHam from "./TheHam.vue";
+import  { onMounted, ref } from "vue";
+import HamImage from '@/assets/images/ham.svg'
+import XmarkImage from '@/assets/images/xmark.svg'
+
+const hamburgerRef = ref(null)
+const closeRef = ref(null)
+const navRef = ref(null)
+const linkAnchor = ref(null)
+
+onMounted(()=>{
+  const hamDivElement = hamburgerRef.value
+const closeDivElement = closeRef.value
+const navDivElement = navRef.value
+
+
+const links = document.querySelectorAll('ul li a')
+if (hamDivElement && closeDivElement) {
+  const hamDiv = hamDivElement as HTMLElement
+  const closeDiv = closeDivElement as HTMLElement
+  const navDiv = navDivElement as HTMLElement
+
+  hamDiv.addEventListener('click', () => {
+    hamDiv.classList.add('active')
+    closeDiv.classList.add('active')
+    navDiv.classList.add('active')
+  })
+
+  closeDiv.addEventListener('click', () => {
+    closeDiv.classList.remove('active')
+    hamDiv.classList.remove('active')
+    navDiv.classList.remove('active')
+  })
+
+  links.forEach((link) => {
+    link.addEventListener('click', () => {
+      closeDiv.classList.remove('active')
+      hamDiv.classList.remove('active')
+      navDiv.classList.remove('active')
+    })
+  })
+} else {
+  console.error('Could not find .ham or .close elements on the page.')
+}
+})
 </script>
  
 <style scoped>
@@ -105,5 +155,14 @@ import TheHam from "./TheHam.vue";
     transform: translateX(-50%);
     transition: transform 0.8s ease-in;
   }
+}
+.close {
+  display: none;
+}
+.hamburger.active {
+  display: none;
+}
+.close.active {
+  display: block;
 }
 </style>

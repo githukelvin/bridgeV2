@@ -1,20 +1,20 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
 const routes:Array<RouteRecordRaw> =[
-  {
-    path:"/",
-    name:"home",
-    component: ()=>import("@/views/HomeView.vue"),
-    meta:{
-      pageTitle:"Home"
-    }
-  },
+  
 
   {
     path: '/',
     component: ()=>import("@/Layouts/MainMenuLayout.vue"),
     children: [
-     
+      {
+        path:"/",
+        name:"home",
+        component: ()=>import("@/views/HomeView.vue"),
+        meta:{
+          pageTitle:"Home"
+        }
+      },
       {
         path:"/investForm",
         name:"investForm",
@@ -32,8 +32,8 @@ const routes:Array<RouteRecordRaw> =[
         }
       },
       {
-        path:"/fundig",
-        name:"fundig",
+        path:"/funding",
+        name:"funding",
         component: ()=>import("@/views/FundingPage.vue"),
         meta:{
           pageTitle:"Funding"
@@ -64,7 +64,7 @@ const router = createRouter({
   routes: routes
 })
 
-router.beforeEach((to,from,next)=>{
+router.beforeEach((to)=>{
    // current page view title
    document.title = `${to.meta.pageTitle} - ${import.meta.env.VITE_APP_NAME}`
 

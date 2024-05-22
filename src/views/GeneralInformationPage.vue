@@ -1,8 +1,9 @@
 <template>
-  <FormArch step="1" title="General Information">
+  <FormHeader/>
+  <div  class="lg:w-[70vw] mx-auto">
+    <FormArch step="1" title="General Information">
     {{ data }}
     <VForm
-      v-slot="{ meta: formMeta }"
       @submit="nextStep"
       novalidate
       :validation-schema="generalInformationSchema"
@@ -75,14 +76,17 @@
       </div>
     </VForm>
   </FormArch>
+  </div>
+
 </template>
 
 <script setup lang="ts">
-import FormArch from './FormArch.vue'
-import IconArrow from './IconArrow.vue'
-import InputBox from './InputBox.vue'
+import FormArch from '@/components/FormArch.vue'
+import IconArrow from '@/components/IconArrow.vue'
+import InputBox from '@/components/InputBox.vue'
 import { Form as VForm } from 'vee-validate'
-import { supabase } from '../utils/supabaseClient'
+import FormHeader from '@/components/FormHeader.vue'
+// import { supabase } from '@/utils/supabaseUtils.js'
 // import { type FormMeta } from "vee-validate";
 import * as Yup from 'yup'
 
@@ -120,7 +124,7 @@ const nextStep = async (values: any) => {
   values = values as GeneralInformation
 
   console.log(values)
-  data.value = await supabase.from('GeneralInformation').select()
+  // data.value = await supabase.from('GeneralInformation').select()
 
   alert('clicked')
   // router.push()

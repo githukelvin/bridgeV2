@@ -102,9 +102,7 @@
     <!-- <button class="bg-accent-500 px-4 py-3 lg:w-fit lg:mx-auto  text-[1em] font-['Csemibold'] rounded-sm text-primary-500 lg:mt-7">Share an investment Opportunity</button> -->
   </div>
 
-  <div id="contact">
-    <TheFooter/>
-  </div>
+  
  </div>
 </template>
 
@@ -114,8 +112,8 @@ import bulbImage from '@/assets/images/bulb.svg'
 import shakeImage from '@/assets/images/shake.svg'
 import rockectImage from '@/assets/images/rocket.svg'
 import SectionImage from '@/assets/images/imagesection.svg'
-import  TheFooter from '@/components/TheFooter.vue'
-import TheHeader from '@/components/TheHeader.vue'
+// import  TheFooter from '@/components/TheFooter.vue'
+// import TheHeader from '@/components/TheHeader.vue'
 </script>
 
 <style scoped>

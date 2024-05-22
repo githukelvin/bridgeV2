@@ -1,8 +1,11 @@
 <template>
+  <FormHeader/>
+  <div class="lg:w-[70vw] mx-auto">
+
+  </div>
   <FormArch step="2" title="Product/Technology">
     {{ Stage }}
     <VForm
-      v-slot="{ meta: formMeta }"
       @submit="nextStep"
       novalidate
       :validation-schema="prodTechSchema"
@@ -128,10 +131,11 @@
 </template>
 
 <script setup lang="ts">
-import FormArch from './FormArch.vue'
-import InputBox from './InputBox.vue'
-import IconArrow from './IconArrow.vue'
-import { supabase } from '../utils/supabaseClient'
+import FormArch from '@/components/FormArch.vue'
+import IconArrow from '@/components/IconArrow.vue'
+import InputBox from '@/components/InputBox.vue'
+import FormHeader from '@/components/FormHeader.vue'
+// import { supabase } from '@/utils/supabaseUtils'
 import { ref } from 'vue'
 import { Form as VForm, ErrorMessage as VErrorMessage } from 'vee-validate'
 import * as Yup from 'yup'
@@ -169,7 +173,7 @@ const nextStep = async (values: any) => {
   const prodtech = { ...values, stage }
   values = prodtech as ProdTech
   console.log(values)
-  data.value = await supabase.from('Product&Technology').select()
+  // data.value = await supabase.from('Product&Technology').select()
 
   alert('clicked')
 }

@@ -1,12 +1,12 @@
 <template>
-  <FormArch step="4" title="Token Slaes (if applicable)">
+  <div class="lg:w-[70vw] mx-auto">
+    <FormArch step="4" title="Token Slaes (if applicable)">
     {{ data }}
 
     <VForm
       novalidate
       :validationSchema="tokenSchema"
       @submit="nextStep"
-      v-slot="{ meta: formMeta }"
       class="flex flex-col gap-6 w-[90vw] mx-auto lg:w-full"
     >
       <InputBox
@@ -63,14 +63,16 @@
       </div>
     </VForm>
   </FormArch>
+  </div>
+
 </template>
 
 <script setup lang="ts">
-import FormArch from './FormArch.vue'
-import InputBox from './InputBox.vue'
-import IconArrow from './IconArrow.vue'
+import FormArch from '@/components/FormArch.vue'
+import IconArrow from '@/components/IconArrow.vue'
+// import InputBox from '@/components/InputBox.vue'
 import { Form as VForm } from 'vee-validate'
-import { supabase } from '../utils/supabaseClient'
+// import { supabase } from '@/utils/supabaseUtils.js'
 import { ref } from 'vue'
 const data = ref()
 import * as Yup from 'yup'
@@ -98,7 +100,7 @@ const tokenSchema = Yup.object().shape({
 const nextStep = async (values: any) => {
   values = values as Token
   console.log(values)
-  data.value = await supabase.from('Token').select()
+  // data.value = await supabase.from('Token').select()
 
   alert('clicked')
 }

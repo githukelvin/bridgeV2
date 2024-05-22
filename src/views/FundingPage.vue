@@ -1,5 +1,7 @@
 <template>
-  <FormArch step="5" title="Funding Requirements">
+  <FormHeader/>
+  <div class="lg:w-[70vw] mx-auto">
+    <FormArch step="5" title="Funding Requirements">
     <!-- v-slot="{ meta: formMeta }"  -->
     {{ data }}
     <VForm
@@ -64,13 +66,18 @@
       </div>
     </VForm>
   </FormArch>
+  </div>
+
 </template>
 
 <script setup lang="ts">
 import { Form as VForm } from 'vee-validate'
-import FormArch from './FormArch.vue'
-import InputBox from './InputBox.vue'
-import { supabase } from '../utils/supabaseClient'
+import FormArch from '@/components/FormArch.vue'
+import IconArrow from '@/components/IconArrow.vue'
+import InputBox from '@/components/InputBox.vue'
+// import { supabase } from '../utils/supabaseClient'
+import FormHeader from '@/components/FormHeader.vue'
+
 import { ref } from 'vue'
 const data = ref()
 import * as Yup from 'yup'
@@ -96,7 +103,7 @@ const fundingSchema = Yup.object().shape({
 const finishSubmit = async (values: any) => {
   values = values as Fund
   console.log(values)
-  data.value = await supabase.from('Funding').select()
+  // data.value = await supabase.from('Funding').select()
 
   alert('clicked')
 }

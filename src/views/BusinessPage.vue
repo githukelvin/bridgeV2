@@ -1,9 +1,10 @@
 <template>
-  <FormArch step="3" title="Business Model">
+  <FormHeader/>
+  <div class="lg:w-[70vw] mx-auto">
+    <FormArch step="3" title="Business Model">
     {{ data }}
     <VForm
       :validation-schema="businessModelSchema"
-      v-slot="{ meta: formMeta }"
       novalidate
       @submit="nextStep"
       class="flex flex-col gap-6 w-[90vw] mx-auto lg:w-full"
@@ -65,14 +66,18 @@
       </div>
     </VForm>
   </FormArch>
+  </div>
+
 </template>
 
 <script setup lang="ts">
-import FormArch from './FormArch.vue'
-import InputBox from './InputBox.vue'
-import IconArrow from './IconArrow.vue'
+
+import FormArch from '@/components/FormArch.vue'
+import IconArrow from '@/components/IconArrow.vue'
+import InputBox from '@/components/InputBox.vue'
 import { Form as VForm } from 'vee-validate'
-import { supabase } from '../utils/supabaseClient'
+import FormHeader from '@/components/FormHeader.vue'
+// import { supabase } from '@/utils/supabaseUtils'
 import { ref } from 'vue'
 const data = ref()
 import * as Yup from 'yup'
@@ -99,7 +104,7 @@ const businessModelSchema = Yup.object().shape({
 const nextStep = async (values: any) => {
   values = values as Business
   console.log(values)
-  data.value = await supabase.from('Token').select()
+  // data.value = await supabase.from('Token').select()
 
   alert('clicked')
 }
