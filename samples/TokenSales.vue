@@ -70,7 +70,7 @@ import FormArch from './FormArch.vue'
 import InputBox from './InputBox.vue'
 import IconArrow from './IconArrow.vue'
 import { Form as VForm } from 'vee-validate'
-import { supabase } from '../utils/supabaseClient'
+// import { supabase } from '../utils/supabaseClient'
 import { ref } from 'vue'
 const data = ref()
 import * as Yup from 'yup'
@@ -98,7 +98,7 @@ const tokenSchema = Yup.object().shape({
 const nextStep = async (values: any) => {
   values = values as Token
   console.log(values)
-  data.value = await supabase.from('Token').select()
+  // data.value = await supabase.from('Token').select()
 
   alert('clicked')
 }
