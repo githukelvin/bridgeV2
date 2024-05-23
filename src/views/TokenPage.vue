@@ -1,4 +1,5 @@
 <template>
+  <FormHeader />
   <div class="lg:w-[70vw] mt-10 mx-auto">
     <FormArch step="4" title="Token Slaes (if applicable)">
       <VForm
@@ -72,6 +73,8 @@ import InputBox from '@/components/InputBox.vue'
 import { Form as VForm } from 'vee-validate'
 import { supabase } from '@/utils/supabase'
 import { useRouter } from 'vue-router'
+import FormHeader from '@/components/FormHeader.vue'
+
 import { FormMeta } from 'vee-validate'
 import Swal from 'sweetalert2'
 import { ref } from 'vue'
@@ -79,7 +82,7 @@ const data = ref()
 import * as Yup from 'yup'
 
 const router = useRouter()
-
+// https://rdgjxqsloayudwyuqclj.supabase.co/storage/v1/object/public/bridgePitchDecks/4.pdf?t=2024-05-23T15%3A38%3A45.111Z
 interface Token {
   tokenSale: String
   saleTarget: String

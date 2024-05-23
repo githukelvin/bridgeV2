@@ -166,9 +166,12 @@ const uploadPdf = async (event) => {
 
 const finishSubmit = async (values: any) => {
   values = values as Fund
-
   const formId = localStorage.getItem('FormID')
-  const funds = { ...values, id: formId }
+
+  const pdfname = `bridgePitchDecks/${formId}.pdf`
+
+  const funds = { ...values, "id": formId, "pdfName":pdfname }
+
   const pathPdf= localStorage.getItem('pathID')
   if(pathPdf === null || pathPdf === undefined || pathPdf === ''){
     Swal.fire({
