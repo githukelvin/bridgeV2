@@ -1,8 +1,6 @@
 <template>
-  <FormHeader/>
-  <div class="lg:w-[70vw] mx-auto">
-
-  </div>
+  <FormHeader />
+  <div class="lg:w-[70vw] mx-auto"></div>
   <FormArch step="2" title="Product/Technology">
     {{ Stage }}
     <VForm

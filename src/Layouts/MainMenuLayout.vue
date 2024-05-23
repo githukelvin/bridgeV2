@@ -1,12 +1,12 @@
 <template>
-  <div class="flex flex-col ">
+  <div class="flex flex-col">
     <TheHeader />
-   <div class="mb-20">
-    <RouterView />
-   </div>
+    <div class="mb-20">
+      <RouterView />
+    </div>
     <div id="contact">
-    <TheFooter/>
-  </div>
+      <TheFooter />
+    </div>
   </div>
 </template>
 

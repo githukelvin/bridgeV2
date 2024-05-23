@@ -2,7 +2,7 @@
   <div class="hamburger">
     <img class="object-fit" ref="hamburgerRef" :src="HamImage" alt="ham image" />
   </div>
-  <div class="close"  ref="closeRef"> 
+  <div class="close" ref="closeRef">
     <img :src="XmarkImage" alt="x mark image" />
   </div>
 </template>
@@ -10,10 +10,9 @@
 <script setup lang="ts">
 import HamImage from '@/assets/images/ham.svg'
 import XmarkImage from '@/assets/images/xmark.svg'
-import { ref } from 'vue';
+import { ref } from 'vue'
 const hamburgerRef = ref(null)
 const closeRef = ref(null)
-
 
 const hamDivElement = hamburgerRef.value
 const closeDivElement = closeRef.value

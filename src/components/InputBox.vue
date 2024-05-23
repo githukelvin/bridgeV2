@@ -8,7 +8,7 @@
       >
       <VField v-slot="{ field }" :name="vmodelName">
         <textarea
-          class="bg-white rounded-xl text-shade-200 font-['Cmedium'] text-xl px-3"
+          class="bg-white rounded-xl text-shade-200 font-['Cmedium'] py-2 text-xl px-3"
           v-bind="field"
           :id="id"
           name=""

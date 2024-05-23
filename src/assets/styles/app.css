@@ -153,6 +153,6 @@
     font-display: swap;
   }
 }
-body{
-  @apply bg-neutrals-100
+body {
+  @apply bg-neutrals-100;
 }

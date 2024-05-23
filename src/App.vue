@@ -1,11 +1,8 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
- <div>
-<!-- <HomeView/> -->
-  <RouterView />
-</div>
+  <div>
+    <!-- <HomeView/> -->
+    <RouterView />
+  </div>
 </template>
-

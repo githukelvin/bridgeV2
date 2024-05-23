@@ -9,7 +9,7 @@
         /></RouterLink>
       </div>
       <div
-      ref="navRef"
+        ref="navRef"
         class="nav absolute top-[3.7em] w-full py-[2em] lg:relative z-[9999] left-1/2 bg-primary-300 -translate-x-1/2 lg:mt-0 lg:top-0 lg:p-0 lg:left-0 lg:translate-x-0"
       >
         <!--   -->
@@ -21,7 +21,10 @@
               >
             </li>
             <li>
-              <router-link class="text-[#FEFEFE] font-['Csemibold'] text-xl" to="/investForm" ref="linkAnchor"
+              <router-link
+                class="text-[#FEFEFE] font-['Csemibold'] text-xl"
+                to="/investForm"
+                ref="linkAnchor"
                 >Get Investors</router-link
               >
             </li>
@@ -31,7 +34,11 @@
               >
             </li>
             <li>
-              <a class="text-[#FEFEFE] font-['Csemibold'] text-xl" href="../#contact" ref="linkAnchor">
+              <a
+                class="text-[#FEFEFE] font-['Csemibold'] text-xl"
+                href="../#contact"
+                ref="linkAnchor"
+              >
                 Contact Us</a
               >
             </li>
@@ -85,11 +92,11 @@
       </div>
       <div class="ham lg:hidden">
         <div ref="hamburgerRef" class="hamburger">
-    <img class="object-fit"  :src="HamImage" alt="ham image" />
-  </div>
-  <div class="close"  ref="closeRef"> 
-    <img :src="XmarkImage" alt="x mark image" />
-  </div>
+          <img class="object-fit" :src="HamImage" alt="ham image" />
+        </div>
+        <div class="close" ref="closeRef">
+          <img :src="XmarkImage" alt="x mark image" />
+        </div>
       </div>
     </div>
     <div class="w-full h-[1px] bg-white mt-3"></div>
@@ -97,9 +104,9 @@
 </template>
 
 <script setup lang="ts">
-import Logo from "@/assets/images/ColouredVersion.svg"
-import TheHam from "./TheHam.vue";
-import  { onMounted, ref } from "vue";
+import Logo from '@/assets/images/ColouredVersion.svg'
+import TheHam from './TheHam.vue'
+import { onMounted, ref } from 'vue'
 import HamImage from '@/assets/images/ham.svg'
 import XmarkImage from '@/assets/images/xmark.svg'
 
@@ -108,43 +115,42 @@ const closeRef = ref(null)
 const navRef = ref(null)
 const linkAnchor = ref(null)
 
-onMounted(()=>{
+onMounted(() => {
   const hamDivElement = hamburgerRef.value
-const closeDivElement = closeRef.value
-const navDivElement = navRef.value
+  const closeDivElement = closeRef.value
+  const navDivElement = navRef.value
 
+  const links = document.querySelectorAll('ul li a')
+  if (hamDivElement && closeDivElement && navDivElement) {
+    const hamDiv = hamDivElement as HTMLElement
+    const closeDiv = closeDivElement as HTMLElement
+    const navDiv = navDivElement as HTMLElement
 
-const links = document.querySelectorAll('ul li a')
-if (hamDivElement && closeDivElement) {
-  const hamDiv = hamDivElement as HTMLElement
-  const closeDiv = closeDivElement as HTMLElement
-  const navDiv = navDivElement as HTMLElement
+    hamDiv.addEventListener('click', () => {
+      hamDiv.classList.add('active')
+      closeDiv.classList.add('active')
+      navDiv.classList.add('active')
+    })
 
-  hamDiv.addEventListener('click', () => {
-    hamDiv.classList.add('active')
-    closeDiv.classList.add('active')
-    navDiv.classList.add('active')
-  })
-
-  closeDiv.addEventListener('click', () => {
-    closeDiv.classList.remove('active')
-    hamDiv.classList.remove('active')
-    navDiv.classList.remove('active')
-  })
-
-  links.forEach((link) => {
-    link.addEventListener('click', () => {
+    closeDiv.addEventListener('click', () => {
       closeDiv.classList.remove('active')
       hamDiv.classList.remove('active')
       navDiv.classList.remove('active')
     })
-  })
-} else {
-  console.error('Could not find .ham or .close elements on the page.')
-}
+
+    links.forEach((link) => {
+      link.addEventListener('click', () => {
+        closeDiv.classList.remove('active')
+        hamDiv.classList.remove('active')
+        navDiv.classList.remove('active')
+      })
+    })
+  } else {
+    console.error('Could not find .ham or .close elements on the page.')
+  }
 })
 </script>
- 
+
 <style scoped>
 @media (max-width: 1024px) {
   .nav {
