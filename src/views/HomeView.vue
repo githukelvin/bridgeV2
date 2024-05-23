@@ -12,10 +12,10 @@
             We Specialize In Bridging Web3 Innovators to Investors Facilitating Them to Get Funding.
           </h1>
           <!-- <a  href="/investForm"  class="bg-accent-500 px-4 py-3  text-[1.2em] font-['Cbold'] rounded-sm text-primary-500 lg:mt-7">Share an Investment Opportunity</a> -->
-          <a
-            href="mailto:investments@br-ge.com"
+          <RouterLink
+            to="/investForm"
             class="bg-accent-500 px-4 py-3 text-[1.2em] font-['Cbold'] rounded-sm text-primary-500 lg:mt-7"
-            >Share an Investment Opportunity</a
+            >Share an Investment Opportunity</RouterLink
           >
         </div>
         <div class="flex items-end">
@@ -96,10 +96,10 @@
         Great ideas deserve great opportunities. Bridge your path to success with the right funding
       </p>
       <!-- <a  href="/investForm"  class="bg-accent-500 px-4 py-3  text-[1.2em] font-['Cbold'] rounded-sm text-primary-500 lg:mt-7">Share an Investment Opportunity</a> -->
-      <a
-        href="mailto:investments@br-ge.com"
+      <RouterLink
+        to="/investForm"
         class="bg-accent-500 px-4 py-3 text-[1.2em] font-['Cbold'] rounded-sm text-primary-500 lg:mt-7"
-        >Share an Investment Opportunity</a
+        >Share an Investment Opportunity</RouterLink
       >
       <!-- <button class="bg-accent-500 px-4 py-3 lg:w-fit lg:mx-auto  text-[1em] font-['Csemibold'] rounded-sm text-primary-500 lg:mt-7">Share an investment Opportunity</button> -->
     </div>
