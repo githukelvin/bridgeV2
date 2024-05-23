@@ -97,7 +97,6 @@ const tokenSchema = Yup.object().shape({
 
 const nextStep = async (values: any) => {
   values = values as Token
-  console.log(values)
   // data.value = await supabase.from('Token').select()
 
   alert('clicked')

@@ -150,7 +150,16 @@ const uploadPdf = async (event) => {
         uploadedSuccessfully.value = true
       }
     } catch (error) {
-      console.error(error)
+      Swal.fire({
+          text: 'File Upload error ocurred retry',
+          icon: 'error',
+          buttonsStyling: false,
+          confirmButtonText: 'Try again!',
+          heightAuto: false,
+          customClass: {
+            confirmButton: 'btn font-[cbold] bg-[#d00000] p-[1em] rounded-xl text-white'
+          }
+        })
     }
   }
 }

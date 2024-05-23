@@ -95,7 +95,6 @@ const fundingSchema = Yup.object().shape({
 
 const finishSubmit = async (values: any) => {
   values = values as Fund
-  console.log(values)
   data.value = await supabase.from('Funding').select()
 
   alert('clicked')

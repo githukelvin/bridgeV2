@@ -98,7 +98,6 @@ const businessModelSchema = Yup.object().shape({
 })
 const nextStep = async (values: any) => {
   values = values as Business
-  console.log(values)
   data.value = await supabase.from('Token').select()
 
   alert('clicked')

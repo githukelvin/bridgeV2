@@ -99,13 +99,13 @@ interface GeneralInformation {
 
 const generalInformationSchema = Yup.object().shape({
   name: Yup.string().required(),
-  projectName: Yup.string().min(8, 'values must exceed 8').required(),
-  companyEmail: Yup.string().email().min(8, 'values must exceed 8').required(),
-  description: Yup.string().min(8, 'values must exceed 8').required(),
-  foundersNames: Yup.string().min(8, 'values must exceed 8').required(),
-  founderBackgrounds: Yup.string().min(8, 'values must exceed 8').required(),
-  expBlockchain: Yup.string().min(8, 'values must exceed 8').required(),
-  teamProfiles: Yup.string().min(8, 'values must exceed 8').required()
+  projectName: Yup.string().min(4, 'values must exceed 4').required(),
+  companyEmail: Yup.string().email().min(4, 'values must exceed 4').required(),
+  description: Yup.string().min(4, 'values must exceed 4').required(),
+  foundersNames: Yup.string().min(4, 'values must exceed 4').required(),
+  founderBackgrounds: Yup.string().min(4, 'values must exceed 4').required(),
+  expBlockchain: Yup.string().min(4, 'values must exceed 4').required(),
+  teamProfiles: Yup.string().min(4, 'values must exceed 4').required()
 })
 
 import { ref } from 'vue'
@@ -119,7 +119,6 @@ const router = useRouter()
 const nextStep = async (values: any) => {
   values = values as GeneralInformation
 
-  console.log(values)
   data.value = await supabase.from('GeneralInformation').select()
 
   alert('clicked')

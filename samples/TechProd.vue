@@ -168,7 +168,6 @@ const nextStep = async (values: any) => {
   const stage = Stage.value
   const prodtech = { ...values, stage }
   values = prodtech as ProdTech
-  console.log(values)
   data.value = await supabase.from('Product&Technology').select()
 
   alert('clicked')
