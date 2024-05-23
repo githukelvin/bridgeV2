@@ -8,7 +8,7 @@
         class="flex flex-col gap-6 w-[90vw] mx-auto lg:w-full"
         :validationSchema="fundingSchema"
         novalidate
-        @submit.prevent="finishSubmit"
+        @submit="finishSubmit"
       >
         <div class="flex flex-col gap-3 lg:grid lg:grid-cols-2 lg:gap-6">
           <InputBox rows="2" id="amount" label="Amount of funding sought" vmodelName="amount" />
@@ -44,6 +44,12 @@
             Upload Pitch Deck
           </button> -->
           <div class="flex flex-col gap-1">
+            <p
+              v-show="uploadedSuccessfully"
+              class="block mb-2 text-xl font-['Cmedium'] text-primary-500 dark:text-primary-500"
+            >
+              File uploaded successfully!
+            </p>
             <label
               class="block mb-2 text-xl font-['Cmedium'] text-primary-500 dark:text-primary-500"
               for="file_input"
@@ -54,6 +60,7 @@
               id="file_input"
               type="file"
               accept="application/pdf"
+              @change="uploadPdf"
             />
           </div>
 
@@ -70,12 +77,18 @@
 </template>
 
 <script setup lang="ts">
+// @ts-nocheck
 import { Form as VForm } from 'vee-validate'
 import FormArch from '@/components/FormArch.vue'
 import IconArrow from '@/components/IconArrow.vue'
 import InputBox from '@/components/InputBox.vue'
-// import { supabase } from '../utils/supabaseClient'
+import { supabase } from '@/utils/supabase'
 import FormHeader from '@/components/FormHeader.vue'
+import Swal from 'sweetalert2'
+
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 import { ref } from 'vue'
 const data = ref()
@@ -98,12 +111,109 @@ const fundingSchema = Yup.object().shape({
   useOfFunds: Yup.string().required(),
   commitments: Yup.string().required()
 })
+const pdfFile = ref(null)
+
+const uploadedSuccessfully = ref(false)
+
+const uploadPdf = async (event) => {
+  const fileInput = event.target
+  const file = fileInput.files?.[0]
+  const formId = localStorage.getItem('FormID')
+
+  if (file) {
+    uploadedSuccessfully.value = false
+
+    // Generate a unique filename
+    const uniqueFileName = `${formId}.pdf`
+
+    try {
+      const { data, error } = await supabase.storage
+        .from('bridgePitchDecks')
+        .upload(uniqueFileName, file, {
+          contentType: 'application/pdf',
+          upsert: true
+        })
+      localStorage.setItem('pathID', data.id)
+
+      if (error) {
+        Swal.fire({
+          text: 'File Upload error ocurred retry',
+          icon: 'error',
+          buttonsStyling: false,
+          confirmButtonText: 'Try again!',
+          heightAuto: false,
+          customClass: {
+            confirmButton: 'btn font-[cbold] bg-[#d00000] p-[1em] rounded-xl text-white'
+          }
+        })
+      } else {
+        uploadedSuccessfully.value = true
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
 
 const finishSubmit = async (values: any) => {
   values = values as Fund
-  console.log(values)
-  // data.value = await supabase.from('Funding').select()
 
-  alert('clicked')
+  const formId = localStorage.getItem('FormID')
+  const funds = { ...values, id: formId }
+  const pathPdf= localStorage.getItem('pathID')
+  if(pathPdf === null || pathPdf === undefined || pathPdf === ''){
+    Swal.fire({
+          text: 'Upload  your Pitch deck',
+          icon: 'error',
+          buttonsStyling: false,
+          confirmButtonText: 'OK',
+          heightAuto: false,
+          customClass: {
+            confirmButton: 'btn font-[cbold] bg-[#d00000] p-[1em] rounded-xl text-white'
+          }
+        })
+  }else{
+    try {
+    const { data, error } = await supabase.from('Funding').insert(funds)
+
+    if (error) {
+      Swal.fire({
+        text: 'error Occurred retry',
+        icon: 'error',
+        buttonsStyling: false,
+        confirmButtonText: 'Try again!',
+        heightAuto: false,
+        customClass: {
+          confirmButton: 'btn font-[cbold] bg-[#d00000] p-[1em] rounded-xl text-white'
+        }
+      })
+    } else {
+      Swal.fire({
+        text: 'Project Submitted Sucessfully',
+        icon: 'success',
+        buttonsStyling: false,
+        heightAuto: false,
+        customClass: {
+          confirmButton: 'btn font-[cbold] bg-[#007200] px-[2em] p-[1em] rounded-xl  text-white'
+        }
+      }).then(() => {
+        router.push({ name: 'home' })
+      })
+    }
+  } catch (error) {
+    Swal.fire({
+      text: 'error Occurred retry',
+      icon: 'error',
+      buttonsStyling: false,
+      confirmButtonText: 'Try again!',
+      heightAuto: false,
+      customClass: {
+        confirmButton: 'btn font-[cbold] bg-[#d00000] p-[1em] rounded-xl text-white'
+      }
+    })
+  }
+  }
+
+  
 }
 </script>

@@ -35,18 +35,6 @@ export default {
             .upload(uniqueFileName, file, {
               contentType: 'application/pdf',
               upsert: true,
-              progress: (progressEvent) => {
-                const percentComplete = Math.round(
-                  (progressEvent.loaded * 100) / progressEvent.total
-                )
-                console.log(`Upload progress: ${percentComplete}%`)
-
-                // Update your progress bar or UI component with 'percentComplete' value here
-                if (uploadProgress.value) {
-                  // Assuming 'uploadProgress' is a state variable or reference
-                  uploadProgress.value = percentComplete
-                }
-              }
             })
 
           if (error) {

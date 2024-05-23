@@ -2,7 +2,6 @@
   <FormHeader />
   <div class="lg:w-[70vw] mx-auto">
     <FormArch step="1" title="General Information">
-      {{ data }}
       <VForm
         @submit="nextStep"
         novalidate
@@ -80,14 +79,17 @@
 </template>
 
 <script setup lang="ts">
+// @ts-nocheck
+
 import FormArch from '@/components/FormArch.vue'
 import IconArrow from '@/components/IconArrow.vue'
 import InputBox from '@/components/InputBox.vue'
 import { Form as VForm } from 'vee-validate'
 import FormHeader from '@/components/FormHeader.vue'
-// import { supabase } from '@/utils/supabaseUtils.js'
+import { supabase } from '@/utils/supabase'
 // import { type FormMeta } from "vee-validate";
 import * as Yup from 'yup'
+import Swal from 'sweetalert2'
 
 interface GeneralInformation {
   name: String
@@ -122,12 +124,33 @@ const router = useRouter()
 const nextStep = async (values: any) => {
   values = values as GeneralInformation
 
-  console.log(values)
-  // data.value = await supabase.from('GeneralInformation').select()
+  try {
+    const { data, error } = await supabase.from('GeneralInformation').insert(values).select()
 
-  alert('clicked')
-  // router.push()
-  // router.push("/TechProduct")
+    localStorage.setItem('FormID', data[0].user_id)
+    Swal.fire({
+      text: 'Form Submitted Sucessfully',
+      icon: 'success',
+      buttonsStyling: false,
+      heightAuto: false,
+      customClass: {
+        confirmButton: 'btn font-[cbold] bg-[#007200] px-[2em] p-[1em] rounded-xl  text-white'
+      }
+    }).then(() => {
+      router.push({ name: 'techproduct' })
+    })
+  } catch (error) {
+    Swal.fire({
+      text: 'error Occurred retry',
+      icon: 'error',
+      buttonsStyling: false,
+      confirmButtonText: 'Try again!',
+      heightAuto: false,
+      customClass: {
+        confirmButton: 'btn font-[cbold] bg-[#d00000] p-[1em] rounded-xl text-white'
+      }
+    })
+  }
 }
 </script>
 

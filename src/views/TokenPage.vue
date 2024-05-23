@@ -1,8 +1,6 @@
 <template>
-  <div class="lg:w-[70vw] mx-auto">
+  <div class="lg:w-[70vw] mt-10 mx-auto">
     <FormArch step="4" title="Token Slaes (if applicable)">
-      {{ data }}
-
       <VForm
         novalidate
         :validationSchema="tokenSchema"
@@ -67,14 +65,20 @@
 </template>
 
 <script setup lang="ts">
+// @ts-nocheck
 import FormArch from '@/components/FormArch.vue'
 import IconArrow from '@/components/IconArrow.vue'
-// import InputBox from '@/components/InputBox.vue'
+import InputBox from '@/components/InputBox.vue'
 import { Form as VForm } from 'vee-validate'
-// import { supabase } from '@/utils/supabaseUtils.js'
+import { supabase } from '@/utils/supabase'
+import { useRouter } from 'vue-router'
+import { FormMeta } from 'vee-validate'
+import Swal from 'sweetalert2'
 import { ref } from 'vue'
 const data = ref()
 import * as Yup from 'yup'
+
+const router = useRouter()
 
 interface Token {
   tokenSale: String
@@ -98,9 +102,57 @@ const tokenSchema = Yup.object().shape({
 
 const nextStep = async (values: any) => {
   values = values as Token
-  console.log(values)
-  // data.value = await supabase.from('Token').select()
+  const formId = localStorage.getItem('FormID')
+  const token = { ...values, id: formId }
+  if (!tokenSchema.isValid) {
+    Swal.fire({
+      text: 'Fill an Empty Filled',
+      icon: 'error',
+      buttonsStyling: false,
+      confirmButtonText: 'Try again!',
+      heightAuto: false,
+      customClass: {
+        confirmButton: 'btn font-[cbold] bg-[#d00000] p-[1em] rounded-xl text-white'
+      }
+    })
+  }
 
-  alert('clicked')
+  try {
+    const { data, error } = await supabase.from('Token').insert(token)
+    if (error) {
+      Swal.fire({
+        text: 'error Occurred retry',
+        icon: 'error',
+        buttonsStyling: false,
+        confirmButtonText: 'Try again!',
+        heightAuto: false,
+        customClass: {
+          confirmButton: 'btn font-[cbold] bg-[#d00000] p-[1em] rounded-xl text-white'
+        }
+      })
+    }
+    Swal.fire({
+      text: 'Form Submitted Sucessfully',
+      icon: 'success',
+      buttonsStyling: false,
+      heightAuto: false,
+      customClass: {
+        confirmButton: 'btn font-[cbold] bg-[#007200] px-[2em] p-[1em] rounded-xl  text-white'
+      }
+    }).then(() => {
+      router.push({ name: 'funding' })
+    })
+  } catch (error) {
+    Swal.fire({
+      text: 'error Occurred retry',
+      icon: 'error',
+      buttonsStyling: false,
+      confirmButtonText: 'Try again!',
+      heightAuto: false,
+      customClass: {
+        confirmButton: 'btn font-[cbold] bg-[#d00000] p-[1em] rounded-xl text-white'
+      }
+    })
+  }
 }
 </script>
